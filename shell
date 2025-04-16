@@ -1,0 +1,108 @@
+# 1. Read your name from the keyboard and display it
+read -p "Enter your name: " name
+echo "Your name is $name"
+
+# 2. a) Create the directory structure dir1/dir4 and dir1/dir2/dir3 with a single command
+mkdir -p dir1/dir4 dir1/dir2/dir3
+
+# 3. b) Create a new directory
+mkdir new_directory
+
+# 3. c) Moving or renaming directories
+# Uncomment and modify to move or rename directories
+ mv new_directory file
+
+
+# 3. d) Display the current directory
+pwd
+
+# 4. Execute ls and store the output to a file lsoutput
+ls > lsoutput
+
+# 6. Copy the file file1 to newfile
+
+# a) If newfile already exists, it should be replaced
+vi file1.sh 
+cp -f file1.sh newfile
+
+# b) If newfile already exists, it should not be replaced
+cp -n file1.sh newfile
+
+# 7. Using expr
+# a) Read two integers X and Y. Display sum, difference, product, quotient, and remainder
+read -p "Enter the first integer (X): " X
+read -p "Enter the second integer (Y): " Y
+sum=$(expr $X + $Y)
+echo "Sum: $sum"
+diff=$(expr $X - $Y)
+echo "Difference: $diff"
+prod=$(expr $X \* $Y)
+echo "Product: $prod"
+quot=$(expr $X / $Y)
+echo "Quotient: $quot"
+rem=$(expr $X % $Y)
+echo "Remainder: $rem"
+
+# b) Read a string S, a position p, and a length l. Display the substring of length l starting at position p from the string S
+read -p "Enter a string (S): " S
+read -p "Enter the position (p): " p
+read -p "Enter the length (l): " l
+substring=$(echo $S | cut -c$p-$(($p + $l - 1)))
+echo "Substring: $substring"
+
+# 8. Using grep
+# a) Displaying the count of number of matches using grep
+grep -c "pattern" file1.sh
+
+# b) Displaying only the matched pattern using grep
+grep -o "pattern" file1.sh
+
+# c) Display all lines in a file that contains the string "abc"
+grep "abc" filename
+
+
+# 9. List all files and directories and give them as input to `grep` command using piping in Linux.
+ls -la | grep "pattern"
+
+# a) Find Files Containing "txt"
+ls -la | grep "txt"
+
+# b) Find Only Directories
+ls -la | grep "^d"
+
+# c) Find Executable Files (.sh Scripts)
+ls -la | grep "\.sh$"
+
+
+# 1️⃣0️⃣ Execute ls -l and feed the result to less command to scroll through the directory listing
+ls -l | less
+
+# 1️⃣1️⃣ Create 3 files containing name, age, and marks of 5 students and merge them into a CSV
+echo -e "Alice\nBob\nCharlie\nDavid\nEmma" > names.txt
+echo -e "20\n21\n22\n23\n24" > ages.txt
+echo -e "85\n90\n78\n88\n95" > marks.txt
+paste -d "," names.txt ages.txt marks.txt > students.csv
+echo "Name,Age,Marks" | cat - students.csv > temp.csv && mv temp.csv students.csv
+cat students.csv
+
+# 1️⃣2️⃣ Find a specific file using the locate command (faster than find)
+sudo updatedb  # Update file database
+locate filename.txt  # Find the file (replace filename.txt with the actual file name)
+
+# 1️⃣3️⃣ Display the first 5 lines of a file
+head -n 5 students.csv 
+ # Replace filename.txt with the actual file
+
+# 1️⃣4️⃣ Change the ownership of a file (replace 'username' with actual user)
+sudo chown username students.csv  
+# Replace username and filename.txt
+
+# 1️⃣5️⃣ Execute a standard input and output redirection command
+cat < input.txt > output.txt  # Redirects content of input.txt to output.txt
+
+# 1️⃣6️⃣ Create and concatenate files using cat
+echo "Hello," > file1
+echo ", Greetings!!" > file2
+read -p "Enter your name: " name
+cat file1 <(echo "$name") file2
+
